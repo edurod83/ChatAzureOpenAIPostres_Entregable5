@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Azure AI Chat{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- ═══ BARRA LATERAL ═══════════════════════════════════════════════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <!-- Icono de la marca -->
+          <svg class="brand-icon" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M10 16c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3" fill="currentColor"/>
+          </svg>
+          <span class="brand-name">Azure AI Chat</span>
+        </div>
+
+        <!-- Botón nueva conversación -->
+        <form action="/conversations/new" method="post">
+          <button type="submit" class="btn-new-chat">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 5v14M5 12h14" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Nueva conversación</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="sidebar-content">
+        <p class="conversations-label">Conversaciones recientes</p>
+        <nav class="conversations-list">
+          {% for conv in conversations %}
+          <div class="conversation-item
+               {% if active_conversation and active_conversation.id == conv.id %}active{% endif %}">
+
+            <a href="/conversations/{{ conv.id }}" class="conversation-link">
+              <span class="conversation-title">{{ conv.title }}</span>
+              <span class="conversation-date">
+                {{ conv.updated_at.strftime('%d/%m %H:%M') }}
+              </span>
+            </a>
+
+            <form action="/conversations/{{ conv.id }}/delete" method="post"
+                  class="delete-form"
+                  onsubmit="return confirm('¿Eliminar esta conversación?')">
+              <button type="submit" class="btn-delete" title="Eliminar conversación">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+          {% else %}
+          <div class="no-conversations">
+            <p>Aún no hay conversaciones.</p>
+            <p>¡Empieza una nueva!</p>
+          </div>
+          {% endfor %}
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ═══ CONTENIDO PRINCIPAL ════════════════════════════════════════════ -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div><!-- /.app-container -->
+
+  <script src="/static/js/chat.js"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Azure AI Chat{% endblock %}
+
+{% block content %}
+<div class="welcome-screen">
+  <div class="welcome-content">
+
+    <!-- Logo animado -->
+    <div class="welcome-icon">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wg" x1="0" y1="0" x2="100" y2="100"
+                          gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366f1"/>
+            <stop offset="1" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" stroke="url(#wg)" stroke-width="2.5"/>
+        <path d="M32 50c0-9.941 8.059-18 18-18s18 8.059 18 18-8.059 18-18 18"
+              stroke="url(#wg)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="7" fill="url(#wg)"/>
+        <path d="M50 28v-8M50 80v-8M28 50h-8M80 50h-8"
+              stroke="url(#wg)" stroke-width="2.5" stroke-linecap="round"
+              opacity="0.4"/>
+      </svg>
+    </div>
+
+    <h1 class="welcome-title">Hola, ¿en qué puedo ayudarte?</h1>
+    <p class="welcome-subtitle">Conectado a Azure OpenAI · Conversaciones guardadas en PostgreSQL</p>
+
+    <div class="welcome-actions">
+      <form action="/conversations/new" method="post">
+        <button type="submit" class="btn-start">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Comenzar conversación
+        </button>
+      </form>
+    </div>
+
+    <div class="welcome-features">
+      <div class="feature">
+        <span class="feature-icon">💬</span>
+        <span>Historial persistente</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <span>Respuestas en tiempo real</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🔒</span>
+        <span>Azure OpenAI</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+# ============================================================
+# .gitignore — Azure AI Chat (FastAPI + PostgreSQL)
+# ============================================================
+
+# ── Credenciales y variables de entorno ─────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Entornos virtuales ───────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.virtualenv/
+
+# ── Alembic ─────────────────────────────────────────────────
+# Los scripts de migración SÍ se versionan; sólo ignorar caché
+alembic/__pycache__/
+alembic/versions/__pycache__/
+
+# ── Bases de datos locales ───────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Pytest / cobertura ───────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── IDEs y editores ──────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Sistema operativo ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Mypy / type checkers ─────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+dmypy.json
