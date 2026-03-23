@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   # ── Base de datos PostgreSQL ────────────────────────────────────────
-  db:
+  chatazure_db:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
@@ -20,15 +20,15 @@ services:
       retries: 5
 
   # ── Aplicación backend (FastAPI) ────────────────────────────────────
-  backend:
+  chatazure_web:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "7001:8000"
+      - "7000:8000"
     depends_on:
-      db:
+      chatazure_db:
         condition: service_healthy
     env_file:
       - .env
