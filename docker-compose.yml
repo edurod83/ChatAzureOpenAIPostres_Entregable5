@@ -6,9 +6,9 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: pgadmin
-      POSTGRES_PASSWORD: Luised_0883
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -34,7 +34,7 @@ services:
       - .env
     environment:
       # Sobreescribe DATABASE_URL para apuntar al servicio 'db' local
-      DATABASE_URL: postgresql://pgadmin:Luised_0883@db:5432/postgres?sslmode=disable
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@chatazure_db:5432/${POSTGRES_DB}?sslmode=disable
 
 volumes:
   pgdata:
